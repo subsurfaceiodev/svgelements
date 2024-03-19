@@ -9155,7 +9155,7 @@ class SVG(Group):
                         height = s.viewbox.height if s.viewbox is not None else 1000
 
                     s.render(ppi=ppi, width=width, height=height, viewbox=s.viewbox)
-                    height, width = s.width, s.height
+                    width, height = s.width, s.height
                     if s.viewbox is not None:
                         try:
                             if s.height == 0 or s.width == 0:
@@ -9560,6 +9560,8 @@ def _write_node(node, xml_tree=None, viewport_transform=None):
             xml_tree.set(SVG_ATTR_FONT_STYLE, str(node.font_style))
         if node.font_variant:
             xml_tree.set(SVG_ATTR_FONT_VARIANT, str(node.font_variant))
+        if node.font_weight:
+            xml_tree.set(SVG_ATTR_FONT_WEIGHT, str(node.font_weight))
         if node.font_stretch:
             xml_tree.set(SVG_ATTR_FONT_STRETCH, node.font_stretch)
         if node.font_size:
