@@ -8147,6 +8147,7 @@ class Text(SVGElement, GraphicObject, Transformable):
         self.line_height = 16.0
         self.font_family = "sans-serif"
         self.path = None
+        self.alignment_baseline = 'auto'
 
         Transformable.__init__(self, *args, **kwargs)
         GraphicObject.__init__(self, *args, **kwargs)
@@ -8162,6 +8163,7 @@ class Text(SVGElement, GraphicObject, Transformable):
         values.append("%s='%s'" % (SVG_ATTR_FONT_STRETCH, self.font_stretch))
         values.append("%s=%d" % (SVG_ATTR_FONT_SIZE, self.font_size))
         values.append("%s='%s'" % (SVG_ATTR_TEXT_ANCHOR, self.anchor))
+        values.append("%s='%s'" % (SVG_ATTR_TEXT_ALIGNMENT_BASELINE, self.alignment_baseline))
         if self.x != 0 or self.y != 0:
             values.append("%s=%s" % (SVG_ATTR_X, self.x))
             values.append("%s=%s" % (SVG_ATTR_Y, self.y))
@@ -8194,6 +8196,7 @@ class Text(SVGElement, GraphicObject, Transformable):
             values.append("font_stretch='%s'" % self.font_stretch)
         values.append("font_size=%d" % self.font_size)
         values.append("text_anchor='%s'" % self.anchor)
+        values.append("alignment_baseline='%s'" % self.alignment_baseline)
         if self.x != 0 or self.y != 0:
             values.append("%s=%s" % (SVG_ATTR_X, self.x))
             values.append("%s=%s" % (SVG_ATTR_Y, self.y))
@@ -8233,6 +8236,8 @@ class Text(SVGElement, GraphicObject, Transformable):
             return False
         if self.anchor != other.anchor:
             return False
+        if self.alignment_baseline != other.alignment_baseline:
+            return False
         if self.font_style != other.font_style:
             return False
         if self.font_variant != other.font_variant:
@@ -8268,6 +8273,7 @@ class Text(SVGElement, GraphicObject, Transformable):
         self.dx = s.dx
         self.dy = s.dy
         self.anchor = s.anchor
+        self.alignment_baseline = s.alignment_baseline
         self.font_family = s.font_family
         self.font_style = s.font_style
         self.font_variant = s.font_variant
@@ -8399,6 +8405,9 @@ class Text(SVGElement, GraphicObject, Transformable):
 
         self.anchor = values.get("text_anchor", self.anchor)
         self.anchor = values.get(SVG_ATTR_TEXT_ANCHOR, self.anchor)
+
+        self.alignment_baseline = values.get("alignment_baseline", self.alignment_baseline)
+        self.alignment_baseline = values.get(SVG_ATTR_TEXT_ALIGNMENT_BASELINE, self.alignment_baseline)
 
         font = values.get(SVG_ATTR_FONT, None)
         if font is not None:
@@ -9570,6 +9579,8 @@ def _write_node(node, xml_tree=None, viewport_transform=None):
             xml_tree.set("line_height", str(node.line_height))
         if node.anchor:
             xml_tree.set(SVG_ATTR_TEXT_ANCHOR, node.anchor)
+        if node.alignment_baseline:
+            xml_tree.set(SVG_ATTR_TEXT_ALIGNMENT_BASELINE, node.alignment_baseline)
     elif isinstance(node, Desc):
         xml_tree = subxml(xml_tree, SVG_TAG_DESC)
         if node.desc:
