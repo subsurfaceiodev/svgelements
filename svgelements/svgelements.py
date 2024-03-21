@@ -3584,6 +3584,8 @@ class GraphicObject:
             and self.stroke is not None
             and self.stroke.value is not None
         ):
+            if '%' in stroke_opacity:
+                stroke_opacity = float(stroke_opacity.removesuffix('%')) / 100
             try:
                 self.stroke.opacity = float(stroke_opacity)
             except ValueError:
@@ -3597,6 +3599,8 @@ class GraphicObject:
             and self.fill is not None
             and self.fill.value is not None
         ):
+            if '%' in fill_opacity:
+                fill_opacity = float(fill_opacity.removesuffix('%')) / 100
             try:
                 self.fill.opacity = float(fill_opacity)
             except ValueError:
