@@ -172,30 +172,30 @@ PATTERN_FREQUENCY_UNITS = "Hz|kHz"
 PATTERN_RESOLUTION_UNITS = "dpi|dpcm|dppx"
 PATTERN_PERCENT = "%"
 PATTERN_TRANSFORM = (
-    SVG_TRANSFORM_MATRIX
-    + "|"
-    + SVG_TRANSFORM_TRANSLATE
-    + "|"
-    + SVG_TRANSFORM_TRANSLATE_X
-    + "|"
-    + SVG_TRANSFORM_TRANSLATE_Y
-    + "|"
-    + SVG_TRANSFORM_SCALE
-    + "|"
-    + SVG_TRANSFORM_SCALE_X
-    + "|"
-    + SVG_TRANSFORM_SCALE_Y
-    + "|"
-    + SVG_TRANSFORM_ROTATE
-    + "|"
-    + SVG_TRANSFORM_SKEW
-    + "|"
-    + SVG_TRANSFORM_SKEW_X
-    + "|"
-    + SVG_TRANSFORM_SKEW_Y
+        SVG_TRANSFORM_MATRIX
+        + "|"
+        + SVG_TRANSFORM_TRANSLATE
+        + "|"
+        + SVG_TRANSFORM_TRANSLATE_X
+        + "|"
+        + SVG_TRANSFORM_TRANSLATE_Y
+        + "|"
+        + SVG_TRANSFORM_SCALE
+        + "|"
+        + SVG_TRANSFORM_SCALE_X
+        + "|"
+        + SVG_TRANSFORM_SCALE_Y
+        + "|"
+        + SVG_TRANSFORM_ROTATE
+        + "|"
+        + SVG_TRANSFORM_SKEW
+        + "|"
+        + SVG_TRANSFORM_SKEW_X
+        + "|"
+        + SVG_TRANSFORM_SKEW_Y
 )
 PATTERN_TRANSFORM_UNITS = (
-    PATTERN_LENGTH_UNITS + "|" + PATTERN_ANGLE_UNITS + "|" + PATTERN_PERCENT
+        PATTERN_LENGTH_UNITS + "|" + PATTERN_ANGLE_UNITS + "|" + PATTERN_PERCENT
 )
 
 REGEX_IRI = re.compile(r"url\(#?(.*)\)")
@@ -881,12 +881,12 @@ class Length(object):
         return None
 
     def to_mm(
-        self,
-        ppi=DEFAULT_PPI,
-        relative_length=None,
-        font_size=None,
-        font_height=None,
-        viewbox=None,
+            self,
+            ppi=DEFAULT_PPI,
+            relative_length=None,
+            font_size=None,
+            font_height=None,
+            viewbox=None,
     ):
         value = self.value(
             ppi=ppi,
@@ -899,12 +899,12 @@ class Length(object):
         return Length("%smm" % (Length.str(v)))
 
     def to_cm(
-        self,
-        ppi=DEFAULT_PPI,
-        relative_length=None,
-        font_size=None,
-        font_height=None,
-        viewbox=None,
+            self,
+            ppi=DEFAULT_PPI,
+            relative_length=None,
+            font_size=None,
+            font_height=None,
+            viewbox=None,
     ):
         value = self.value(
             ppi=ppi,
@@ -917,12 +917,12 @@ class Length(object):
         return Length("%scm" % (Length.str(v)))
 
     def to_inch(
-        self,
-        ppi=DEFAULT_PPI,
-        relative_length=None,
-        font_size=None,
-        font_height=None,
-        viewbox=None,
+            self,
+            ppi=DEFAULT_PPI,
+            relative_length=None,
+            font_size=None,
+            font_height=None,
+            viewbox=None,
     ):
         value = self.value(
             ppi=ppi,
@@ -935,13 +935,13 @@ class Length(object):
         return Length("%sin" % (Length.str(v)))
 
     def value(
-        self,
-        ppi=None,
-        relative_length=None,
-        font_size=None,
-        font_height=None,
-        viewbox=None,
-        **kwargs,
+            self,
+            ppi=None,
+            relative_length=None,
+            font_size=None,
+            font_height=None,
+            viewbox=None,
+            **kwargs,
     ):
         if self.amount is None:
             return None
@@ -1949,9 +1949,9 @@ class Color(object):
         g = c1.green - c2.green
         b = c1.blue - c2.blue
         return (
-            (((512 + red_mean) * r * r) >> 8)
-            + (4 * g * g)
-            + (((767 - red_mean) * b * b) >> 8)
+                (((512 + red_mean) * r * r) >> 8)
+                + (4 * g * g)
+                + (((767 - red_mean) * b * b) >> 8)
         )
 
     @staticmethod
@@ -2048,10 +2048,10 @@ class Point:
         except Exception:
             return NotImplemented
         if (
-            isinstance(self.x, Length)
-            or isinstance(self.y, Length)
-            or isinstance(other.x, Length)
-            or isinstance(other.x, Length)
+                isinstance(self.x, Length)
+                or isinstance(self.y, Length)
+                or isinstance(other.x, Length)
+                or isinstance(other.x, Length)
         ):
             return self.x == other.x and self.y == other.y
         return abs(self.x - other.x) <= ERROR and abs(self.y - other.y) <= ERROR
@@ -2360,8 +2360,8 @@ class Point:
             endpoint = point_on_hull
             for t in points:
                 if (
-                    point_on_hull is endpoint
-                    or Point.orientation(point_on_hull, t, endpoint) == 2
+                        point_on_hull is endpoint
+                        or Point.orientation(point_on_hull, t, endpoint) == 2
                 ):
                     endpoint = t
             point_on_hull = endpoint
@@ -2420,7 +2420,7 @@ class Angle(float):
         if angle_string.endswith("grad"):
             return Angle.gradians(float(angle_string[:-4]))
         if angle_string.endswith(
-            "rad"
+                "rad"
         ):  # Must be after 'grad' since 'grad' ends with 'rad' too.
             return Angle.radians(float(angle_string[:-3]))
         if angle_string.endswith("turn"):
@@ -2739,15 +2739,15 @@ class Matrix:
         return self
 
     def render(
-        self,
-        ppi=None,
-        relative_length=None,
-        width=None,
-        height=None,
-        font_size=None,
-        font_height=None,
-        viewbox=None,
-        **kwargs,
+            self,
+            ppi=None,
+            relative_length=None,
+            width=None,
+            height=None,
+            font_size=None,
+            font_height=None,
+            viewbox=None,
+            **kwargs,
     ):
         """
         Provides values to turn trans_x and trans_y values into user units floats rather
@@ -2842,12 +2842,12 @@ class Matrix:
 
     def is_identity(self):
         return (
-            self.a == 1
-            and self.b == 0
-            and self.c == 0
-            and self.d == 1
-            and self.e == 0
-            and self.f == 0
+                self.a == 1
+                and self.b == 0
+                and self.c == 0
+                and self.d == 1
+                and self.e == 0
+                and self.f == 0
         )
 
     def post_cat(self, *components):
@@ -3308,7 +3308,7 @@ class Viewbox:
 
     @staticmethod
     def viewbox_transform(
-        e_x, e_y, e_width, e_height, vb_x, vb_y, vb_width, vb_height, aspect
+            e_x, e_y, e_width, e_height, vb_x, vb_y, vb_width, vb_height, aspect
     ):
         """
         SVG 1.1 7.2, SVG 2.0 8.2 equivalent transform of an SVG viewport.
@@ -3336,14 +3336,14 @@ class Viewbox:
         :return: string of the SVG transform commands to account for the viewbox.
         """
         if (
-            e_x is None
-            or e_y is None
-            or e_width is None
-            or e_height is None
-            or vb_x is None
-            or vb_y is None
-            or vb_width is None
-            or vb_height is None
+                e_x is None
+                or e_y is None
+                or e_width is None
+                or e_height is None
+                or vb_x is None
+                or vb_y is None
+                or vb_width is None
+                or vb_height is None
         ):
             return ""
         if aspect is not None:
@@ -3580,11 +3580,11 @@ class GraphicObject:
         stroke_opacity = values.get("stroke_opacity")
         stroke_opacity = values.get(SVG_ATTR_STROKE_OPACITY, stroke_opacity)
         if (
-            stroke_opacity is not None
-            and self.stroke is not None
-            and self.stroke.value is not None
+                stroke_opacity is not None
+                and self.stroke is not None
+                and self.stroke.value is not None
         ):
-            if '%' in stroke_opacity:
+            if '%' in str(stroke_opacity):
                 stroke_opacity = float(stroke_opacity.removesuffix('%')) / 100
             try:
                 self.stroke.opacity = float(stroke_opacity)
@@ -3595,11 +3595,11 @@ class GraphicObject:
         fill_opacity = values.get("fill_opacity")
         fill_opacity = values.get(SVG_ATTR_FILL_OPACITY, fill_opacity)
         if (
-            fill_opacity is not None
-            and self.fill is not None
-            and self.fill.value is not None
+                fill_opacity is not None
+                and self.fill is not None
+                and self.fill.value is not None
         ):
-            if '%' in fill_opacity:
+            if '%' in str(fill_opacity):
                 fill_opacity = float(fill_opacity.removesuffix('%')) / 100
             try:
                 self.fill.opacity = float(fill_opacity)
@@ -3641,10 +3641,10 @@ class GraphicObject:
             if self.stroke_width is not None:
                 transform = self.transform
                 if (
-                    hasattr(self, "values")
-                    and SVG_ATTR_VECTOR_EFFECT in self.values
-                    and SVG_VALUE_NON_SCALING_STROKE
-                    in self.values[SVG_ATTR_VECTOR_EFFECT]
+                        hasattr(self, "values")
+                        and SVG_ATTR_VECTOR_EFFECT in self.values
+                        and SVG_VALUE_NON_SCALING_STROKE
+                        in self.values[SVG_ATTR_VECTOR_EFFECT]
                 ):
                     # If we do not apply scaling stroke we still apply viewport transform.
                     transform = Matrix(self.values.get("viewport_transform", ""))
@@ -3901,9 +3901,9 @@ class Shape(SVGElement, GraphicObject, Transformable):
             return None  # No bounding box items existed. So no bounding box.
 
         if (
-            with_stroke
-            and self.stroke_width is not None
-            and not (self.stroke is None or self.stroke.value is None)
+                with_stroke
+                and self.stroke_width is not None
+                and not (self.stroke is None or self.stroke.value is None)
         ):
             if transformed:
                 delta = float(self.implicit_stroke_width) / 2.0
@@ -4086,14 +4086,14 @@ class PathSegment:
 
     @staticmethod
     def segment_length(
-        curve,
-        start=0.0,
-        end=1.0,
-        start_point=None,
-        end_point=None,
-        error=ERROR,
-        min_depth=MIN_DEPTH,
-        depth=0,
+            curve,
+            start=0.0,
+            end=1.0,
+            start_point=None,
+            end_point=None,
+            error=ERROR,
+            min_depth=MIN_DEPTH,
+            depth=0,
     ):
         """Recursively approximates the length by straight lines"""
         if start_point is None:
@@ -4181,14 +4181,14 @@ class PathSegment:
 
     @staticmethod
     def find_intersections(
-        segment1,
-        segment2,
-        samples=50,
-        ta=(0.0, 1.0, None),
-        tb=(0.0, 1.0, None),
-        depth=0,
-        enhancements=2,
-        enhance_samples=50,
+            segment1,
+            segment2,
+            samples=50,
+            ta=(0.0, 1.0, None),
+            tb=(0.0, 1.0, None),
+            depth=0,
+            enhancements=2,
+            enhance_samples=50,
     ):
         """
         Calculate intersections by linearized polyline intersections with enhancements.
@@ -4262,7 +4262,7 @@ class PathSegment:
             at = ta[0] + float(hit[1]) * step_a  # Zoomed min+segment intersected.
             bt = tb[0] + float(hit[0]) * step_b
             a_fractional = (
-                ta_hit[i] * step_a
+                    ta_hit[i] * step_a
             )  # Fractional guess within intersected segment
             b_fractional = tb_hit[i] * step_b
             if depth == enhancements:
@@ -4369,9 +4369,9 @@ class Move(PathSegment):
 
     def d(self, current_point=None, relative=None, smooth=None):
         if (
-            current_point is None
-            or (relative is None and self.relative)
-            or (relative is not None and not relative)
+                current_point is None
+                or (relative is None and self.relative)
+                or (relative is not None and not relative)
         ):
             return "M %s" % self.end
         return "m %s" % (self.end - current_point)
@@ -4495,9 +4495,9 @@ class Close(Linear):
 
     def d(self, current_point=None, relative=None, smooth=None):
         if (
-            current_point is None
-            or (relative is None and self.relative)
-            or (relative is not None and not relative)
+                current_point is None
+                or (relative is None and self.relative)
+                or (relative is not None and not relative)
         ):
             return "Z"
         else:
@@ -4509,9 +4509,9 @@ class Line(Linear):
 
     def d(self, current_point=None, relative=None, smooth=None):
         if (
-            current_point is None
-            or (relative is None and self.relative)
-            or (relative is not None and not relative)
+                current_point is None
+                or (relative is None and self.relative)
+                or (relative is not None and not relative)
         ):
             return "L %s" % self.end
         else:
@@ -4545,9 +4545,9 @@ class QuadraticBezier(Curve):
         if not isinstance(other, QuadraticBezier):
             return NotImplemented
         return (
-            self.start == other.start
-            and self.end == other.end
-            and self.control == other.control
+                self.start == other.start
+                and self.end == other.end
+                and self.control == other.control
         )
 
     def __ne__(self, other):
@@ -4651,10 +4651,10 @@ class QuadraticBezier(Curve):
             BA = B / A2
 
             s = (
-                A32 * Sabc
-                + A2 * B * (Sabc - C2)
-                + (4 * C * A - B * B) * log((2 * A2 + BA + Sabc) / (BA + C2))
-            ) / (4 * A32)
+                        A32 * Sabc
+                        + A2 * B * (Sabc - C2)
+                        + (4 * C * A - B * B) * log((2 * A2 + BA + Sabc) / (BA + C2))
+                ) / (4 * A32)
         except (ZeroDivisionError, ValueError):
             # a_dot_b = a.real * b.real + a.imag * b.imag
             if abs(a) < 1e-10:
@@ -4671,7 +4671,7 @@ class QuadraticBezier(Curve):
         """Checks if this segment would be a smooth segment following the previous"""
         if isinstance(previous, QuadraticBezier):
             return self.start == previous.end and (self.control - self.start) == (
-                previous.end - previous.control
+                    previous.end - previous.control
             )
         else:
             return self.control == self.start
@@ -4679,18 +4679,18 @@ class QuadraticBezier(Curve):
     def d(self, current_point=None, relative=None, smooth=None):
         if (smooth is None and self.smooth) or (smooth is not None and smooth):
             if (
-                current_point is None
-                or (relative is None and self.relative)
-                or (relative is not None and not relative)
+                    current_point is None
+                    or (relative is None and self.relative)
+                    or (relative is not None and not relative)
             ):
                 return "T %s" % self.end
             else:
                 return "t %s" % (self.end - current_point)
         else:
             if (
-                current_point is None
-                or (relative is None and self.relative)
-                or (relative is not None and not relative)
+                    current_point is None
+                    or (relative is None and self.relative)
+                    or (relative is not None and not relative)
             ):
                 return "Q %s %s" % (self.control, self.end)
             else:
@@ -4730,10 +4730,10 @@ class CubicBezier(Curve):
         if not isinstance(other, CubicBezier):
             return NotImplemented
         return (
-            self.start == other.start
-            and self.end == other.end
-            and self.control1 == other.control1
-            and self.control2 == other.control2
+                self.start == other.start
+                and self.end == other.end
+                and self.control1 == other.control1
+                and self.control2 == other.control2
         )
 
     def __ne__(self, other):
@@ -4824,7 +4824,7 @@ class CubicBezier(Curve):
         denom = a[0] - 3 * a[1] + 3 * a[2] - a[3]
         if abs(denom) >= 1e-8:
             delta = (
-                a[1] * a[1] - (a[0] + a[1]) * a[2] + a[2] * a[2] + (a[0] - a[1]) * a[3]
+                    a[1] * a[1] - (a[0] + a[1]) * a[2] + a[2] * a[2] + (a[0] - a[1]) * a[3]
             )
             if delta >= 0:  # otherwise no local extrema
                 sqdelta = sqrt(delta)
@@ -4857,7 +4857,7 @@ class CubicBezier(Curve):
             return abs(
                 3 * (p1 - p0) * (1 - t) ** 2
                 + 6 * (p2 - p1) * (1 - t) * t
-                + 3 * (p3 - p2) * t**2
+                + 3 * (p3 - p2) * t ** 2
             )
 
         return quad(_abs_derivative, 0.0, 1.0, epsabs=error, limit=1000)[0]
@@ -4876,7 +4876,7 @@ class CubicBezier(Curve):
         """Checks if this segment would be a smooth segment following the previous"""
         if isinstance(previous, CubicBezier):
             return self.start == previous.end and (self.control1 - self.start) == (
-                previous.end - previous.control2
+                    previous.end - previous.control2
             )
         else:
             return self.control1 == self.start
@@ -4884,9 +4884,9 @@ class CubicBezier(Curve):
     def d(self, current_point=None, relative=None, smooth=None):
         if (smooth is None and self.smooth) or (smooth is not None and smooth):
             if (
-                current_point is None
-                or (relative is None and self.relative)
-                or (relative is not None and not relative)
+                    current_point is None
+                    or (relative is None and self.relative)
+                    or (relative is not None and not relative)
             ):
                 return "S %s %s" % (self.control2, self.end)
             else:
@@ -4896,9 +4896,9 @@ class CubicBezier(Curve):
                 )
         else:
             if (
-                current_point is None
-                or (relative is None and self.relative)
-                or (relative is not None and not relative)
+                    current_point is None
+                    or (relative is None and self.relative)
+                    or (relative is not None and not relative)
             ):
                 return "C %s %s %s" % (self.control1, self.control2, self.end)
             else:
@@ -4964,10 +4964,10 @@ class Arc(Curve):
             )
             return
         if (
-            "left" in kwargs
-            and "right" in kwargs
-            and "top" in kwargs
-            and "bottom" in kwargs
+                "left" in kwargs
+                and "right" in kwargs
+                and "top" in kwargs
+                and "bottom" in kwargs
         ):
             left = kwargs["left"]
             right = kwargs["right"]
@@ -5070,10 +5070,10 @@ class Arc(Curve):
                         cy = ab_mid.y
                     else:
                         cx = (
-                            slope_a * slope_b * (ab_mid.y - bc_mid.y)
-                            - slope_a * bc_mid.x
-                            + slope_b * ab_mid.x
-                        ) / (slope_b - slope_a)
+                                     slope_a * slope_b * (ab_mid.y - bc_mid.y)
+                                     - slope_a * bc_mid.x
+                                     + slope_b * ab_mid.x
+                             ) / (slope_b - slope_a)
                         cy = ab_mid.y - (cx - ab_mid.x) / slope_a
                 self.center = Point(cx, cy)
                 cw = bool(Point.orientation(self.start, control, self.end) == 2)
@@ -5188,12 +5188,12 @@ class Arc(Curve):
         if not isinstance(other, Arc):
             return NotImplemented
         return (
-            self.start == other.start
-            and self.end == other.end
-            and self.prx == other.prx
-            and self.pry == other.pry
-            and self.center == other.center
-            and self.sweep == other.sweep
+                self.start == other.start
+                and self.end == other.end
+                and self.prx == other.prx
+                and self.pry == other.pry
+                and self.center == other.center
+                and self.sweep == other.sweep
         )
 
     def __ne__(self, other):
@@ -5355,7 +5355,7 @@ class Arc(Curve):
             return self._line_length(error=error, min_depth=min_depth)
 
     def _svg_complex_parameterize(
-        self, start, radius, rotation, arc_flag, sweep_flag, end
+            self, start, radius, rotation, arc_flag, sweep_flag, end
     ):
         """Parameterization with complex radius and having rotation factors."""
         self._svg_parameterize(
@@ -5369,7 +5369,7 @@ class Arc(Curve):
         )
 
     def _svg_parameterize(
-        self, start, rx, ry, rotation, large_arc_flag, sweep_flag, end
+            self, start, rx, ry, rotation, large_arc_flag, sweep_flag, end
     ):
         """Conversion from svg parameterization, our chosen native native form.
         http://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes"""
@@ -5707,9 +5707,9 @@ class Arc(Curve):
 
     def d(self, current_point=None, relative=None, smooth=None):
         if (
-            current_point is None
-            or (relative is None and self.relative)
-            or (relative is not None and not relative)
+                current_point is None
+                or (relative is None and self.relative)
+                or (relative is not None and not relative)
         ):
             return "A %G,%G %G %d,%d %s" % (
                 self.rx,
@@ -5995,9 +5995,9 @@ class Path(Shape, MutableSequence):
                 elif last_segment.end != segment.start:
                     segment.start = Point(last_segment.end)
             if (
-                isinstance(segment, Close)
-                and zpoint is not None
-                and segment.end != zpoint
+                    isinstance(segment, Close)
+                    and zpoint is not None
+                    and segment.end != zpoint
             ):
                 segment.end = Point(zpoint)
             last_segment = segment
@@ -6025,9 +6025,9 @@ class Path(Shape, MutableSequence):
                 elif last_segment.end != segment.start:
                     return False
             if (
-                isinstance(segment, Close)
-                and zpoint is not None
-                and segment.end != zpoint
+                    isinstance(segment, Close)
+                    and zpoint is not None
+                    and segment.end != zpoint
             ):
                 return False
             last_segment = segment
@@ -6453,7 +6453,7 @@ class Path(Shape, MutableSequence):
                     parts.append(segment.d(p, relative=relative))
                 elif isinstance(segment, (CubicBezier, QuadraticBezier)):
                     if (override_smooth and smooth_set_value) or (
-                        not override_smooth and segment.smooth
+                            not override_smooth and segment.smooth
                     ):
                         parts.append(
                             segment.d(
@@ -6472,7 +6472,7 @@ class Path(Shape, MutableSequence):
                     parts.append(segment.d(p, relative=segment.relative))
                 elif isinstance(segment, (CubicBezier, QuadraticBezier)):
                     if (override_smooth and smooth_set_value) or (
-                        not override_smooth and segment.smooth
+                            not override_smooth and segment.smooth
                     ):
                         parts.append(
                             segment.d(
@@ -6509,7 +6509,7 @@ class Path(Shape, MutableSequence):
             segment = self[s]
             if isinstance(segment, Arc):
                 arc_required = int(ceil(abs(segment.sweep) / sweep_limit))
-                self[s : s + 1] = list(segment.as_cubic_curves(arc_required))
+                self[s: s + 1] = list(segment.as_cubic_curves(arc_required))
 
     def approximate_arcs_with_quads(self, error=0.1):
         """
@@ -6520,7 +6520,7 @@ class Path(Shape, MutableSequence):
             segment = self[s]
             if isinstance(segment, Arc):
                 arc_required = int(ceil(abs(segment.sweep) / sweep_limit))
-                self[s : s + 1] = list(segment.as_quad_curves(arc_required))
+                self[s: s + 1] = list(segment.as_quad_curves(arc_required))
 
     def approximate_bezier_with_circular_arcs(self, error=0.01):
         """
@@ -6529,7 +6529,7 @@ class Path(Shape, MutableSequence):
         for s in range(len(self) - 1, -1, -1):
             segment = self[s]
             if isinstance(segment, (QuadraticBezier, CubicBezier)):
-                self[s : s + 1] = list(segment.as_circular_arcs(error=error))
+                self[s: s + 1] = list(segment.as_circular_arcs(error=error))
 
 
 class Rect(Shape):
@@ -6817,10 +6817,10 @@ class Rect(Shape):
         translate_x = self.transform.value_trans_x()
         translate_y = self.transform.value_trans_y()
         if (
-            self.transform.value_skew_x() == 0
-            and self.transform.value_skew_y() == 0
-            and scale_x != 0
-            and scale_y != 0
+                self.transform.value_skew_x() == 0
+                and self.transform.value_skew_y() == 0
+                and scale_x != 0
+                and scale_y != 0
         ):
             GraphicObject.reify(self)
             Transformable.reify(self)
@@ -6860,10 +6860,10 @@ class Rect(Shape):
 
     def is_degenerate(self):
         return (
-            self.width == 0
-            or self.height == 0
-            or self.width is None
-            or self.height is None
+                self.width == 0
+                or self.height == 0
+                or self.width is None
+                or self.height is None
         )
 
 
@@ -6994,8 +6994,8 @@ class _RoundShape(Shape):
         steps = 4
         step_size = tau / steps
         if (
-            transformed
-            and self.transform.value_scale_x() * self.transform.value_scale_y() < 0
+                transformed
+                and self.transform.value_scale_x() * self.transform.value_scale_y() < 0
         ):
             step_size = -step_size
         t_start = 0
@@ -7036,10 +7036,10 @@ class _RoundShape(Shape):
         translate_x = self.transform.value_trans_x()
         translate_y = self.transform.value_trans_y()
         if (
-            self.transform.value_skew_x() == 0
-            and self.transform.value_skew_y() == 0
-            and scale_x != 0
-            and scale_y != 0
+                self.transform.value_skew_x() == 0
+                and self.transform.value_skew_y() == 0
+                and scale_x != 0
+                and scale_y != 0
         ):
             GraphicObject.reify(self)
             Transformable.reify(self)
@@ -7597,10 +7597,10 @@ class Subpath:
     def __iadd__(self, other):
         if isinstance(other, str):
             p = Path(other)
-            self._path[self._end : self._end] = p
+            self._path[self._end: self._end] = p
         elif isinstance(other, Path):
             p = copy(other)
-            self._path[self._end : self._end] = p
+            self._path[self._end: self._end] = p
         elif isinstance(other, PathSegment):
             self._path.insert(self._end, other)
         else:
@@ -7692,9 +7692,9 @@ class Subpath:
         path = self._path
         if transformed:
             return [
-                s * path.transform for s in path._segments[self._start : self._end + 1]
+                s * path.transform for s in path._segments[self._start: self._end + 1]
             ]
-        return path._segments[self._start : self._end + 1]
+        return path._segments[self._start: self._end + 1]
 
     def _numeric_index(self, index):
         if index < 0:
@@ -7721,7 +7721,7 @@ class Subpath:
         if transformed:
             return Path(self).bbox(transformed=transformed, with_stroke=with_stroke)
 
-        segments = self._path._segments[self._start : self._end + 1]
+        segments = self._path._segments[self._start: self._end + 1]
         bbs = [seg.bbox() for seg in segments if not isinstance(Close, Move)]
         try:
             xmins, ymins, xmaxs, ymaxs = list(zip(*bbs))
@@ -7729,9 +7729,9 @@ class Subpath:
             return None  # No bounding box items existed. So no bounding box.
 
         if (
-            with_stroke
-            and self._path.stroke_width is not None
-            and not (self._path.stroke is None or self._path.stroke.value is None)
+                with_stroke
+                and self._path.stroke_width is not None
+                and not (self._path.stroke is None or self._path.stroke.value is None)
         ):
             delta = float(self._path.stroke_width) / 2.0
         else:
@@ -7745,7 +7745,7 @@ class Subpath:
         )
 
     def d(self, relative=None, smooth=None):
-        segments = self._path._segments[self._start : self._end + 1]
+        segments = self._path._segments[self._start: self._end + 1]
         return Path.svg_d(segments, relative=relative, smooth=smooth)
 
     def _reverse_segments(self, start, end):
@@ -7777,7 +7777,7 @@ class Subpath:
         if isinstance(self[-1], Close):
             end -= 1
         if isinstance(
-            self[0], Move
+                self[0], Move
         ):  # Move remains in place but references next element.
             start += 1
         self._reverse_segments(start, end)
@@ -8489,9 +8489,9 @@ class Text(SVGElement, GraphicObject, Transformable):
             ymax = max(p0[1], p1[1], p2[1], p3[1])
 
         if (
-            with_stroke
-            and self.stroke_width is not None
-            and not (self.stroke is None or self.stroke.value is None)
+                with_stroke
+                and self.stroke_width is not None
+                and not (self.stroke is None or self.stroke.value is None)
         ):
             if transformed:
                 delta = float(self.implicit_stroke_width) / 2.0
@@ -8544,7 +8544,7 @@ class Image(SVGElement, GraphicObject, Transformable):
             if match:
                 # Data URL
                 self.media_type = match.group(1).split(";")
-                self.data = self.url[match.end(1) + 1 :]
+                self.data = self.url[match.end(1) + 1:]
                 if "base64" in self.media_type:
                     from base64 import b64decode
 
@@ -9002,16 +9002,16 @@ class SVG(Group):
 
     @staticmethod
     def parse(
-        source,
-        reify=True,
-        ppi=DEFAULT_PPI,
-        width=None,
-        height=None,
-        color="black",
-        transform=None,
-        context=None,
-        parse_display_none=False,
-        on_error="ignore",
+            source,
+            reify=True,
+            ppi=DEFAULT_PPI,
+            width=None,
+            height=None,
+            color="black",
+            transform=None,
+            context=None,
+            parse_display_none=False,
+            on_error="ignore",
     ):
         """
         Parses the SVG file. All attributes are things which the SVG document itself could not be aware of, such as
@@ -9051,9 +9051,9 @@ class SVG(Group):
             if event == "start":
                 stack.append((context, values))
                 if (
-                    not parse_display_none
-                    and SVG_ATTR_DISPLAY in values
-                    and values[SVG_ATTR_DISPLAY].lower() == SVG_VALUE_NONE
+                        not parse_display_none
+                        and SVG_ATTR_DISPLAY in values
+                        and values[SVG_ATTR_DISPLAY].lower() == SVG_VALUE_NONE
                 ):
                     continue  # Values has a display=none. Do not render anything. No Shadow Dom.
                 current_values = values
@@ -9117,8 +9117,8 @@ class SVG(Group):
                         value = str(equal_item[1]).strip()
                         attributes[key] = value
                 if (
-                    SVG_ATTR_FILL in attributes
-                    and attributes[SVG_ATTR_FILL] == SVG_VALUE_CURRENT_COLOR
+                        SVG_ATTR_FILL in attributes
+                        and attributes[SVG_ATTR_FILL] == SVG_VALUE_CURRENT_COLOR
                 ):
                     if SVG_ATTR_COLOR in attributes:
                         attributes[SVG_ATTR_FILL] = attributes[SVG_ATTR_COLOR]
@@ -9126,8 +9126,8 @@ class SVG(Group):
                         attributes[SVG_ATTR_FILL] = values[SVG_ATTR_COLOR]
 
                 if (
-                    SVG_ATTR_STROKE in attributes
-                    and attributes[SVG_ATTR_STROKE] == SVG_VALUE_CURRENT_COLOR
+                        SVG_ATTR_STROKE in attributes
+                        and attributes[SVG_ATTR_STROKE] == SVG_VALUE_CURRENT_COLOR
                 ):
                     if SVG_ATTR_COLOR in attributes:
                         attributes[SVG_ATTR_STROKE] = attributes[SVG_ATTR_COLOR]
@@ -9138,9 +9138,9 @@ class SVG(Group):
                     # If transform is already in values, append the new value.
                     if SVG_ATTR_TRANSFORM in values:
                         attributes[SVG_ATTR_TRANSFORM] = (
-                            values[SVG_ATTR_TRANSFORM]
-                            + " "
-                            + attributes[SVG_ATTR_TRANSFORM]
+                                values[SVG_ATTR_TRANSFORM]
+                                + " "
+                                + attributes[SVG_ATTR_TRANSFORM]
                         )
                     else:
                         attributes[SVG_ATTR_TRANSFORM] = attributes[SVG_ATTR_TRANSFORM]
@@ -9149,9 +9149,9 @@ class SVG(Group):
                 values.update(attributes)
                 values[SVG_STRUCT_ATTRIB] = attributes
                 if (
-                    not parse_display_none
-                    and SVG_ATTR_DISPLAY in values
-                    and values[SVG_ATTR_DISPLAY].lower() == SVG_VALUE_NONE
+                        not parse_display_none
+                        and SVG_ATTR_DISPLAY in values
+                        and values[SVG_ATTR_DISPLAY].lower() == SVG_VALUE_NONE
                 ):
                     continue  # If the attributes flag our values to display=none, stop rendering.
                 if SVG_NAME_TAG == tag:
@@ -9231,14 +9231,14 @@ class SVG(Group):
                     context = s  # Non-rendered
                     s.render(ppi=ppi, width=width, height=height)
                 elif tag in (
-                    SVG_TAG_PATH,
-                    SVG_TAG_CIRCLE,
-                    SVG_TAG_ELLIPSE,
-                    SVG_TAG_LINE,  # Shapes
-                    SVG_TAG_POLYLINE,
-                    SVG_TAG_POLYGON,
-                    SVG_TAG_RECT,
-                    SVG_TAG_IMAGE,
+                        SVG_TAG_PATH,
+                        SVG_TAG_CIRCLE,
+                        SVG_TAG_ELLIPSE,
+                        SVG_TAG_LINE,  # Shapes
+                        SVG_TAG_POLYLINE,
+                        SVG_TAG_POLYGON,
+                        SVG_TAG_RECT,
+                        SVG_TAG_IMAGE,
                 ):
                     parse_error = None
                     s = None
@@ -9282,11 +9282,11 @@ class SVG(Group):
                         else:  # "stop"
                             return root
                 elif tag in (
-                    SVG_TAG_STYLE,
-                    SVG_TAG_TEXT,
-                    SVG_TAG_DESC,
-                    SVG_TAG_TITLE,
-                    SVG_TAG_TSPAN,
+                        SVG_TAG_STYLE,
+                        SVG_TAG_TEXT,
+                        SVG_TAG_DESC,
+                        SVG_TAG_TITLE,
+                        SVG_TAG_TSPAN,
                 ):
                     # <style>, <text>, <desc>, <title>
                     continue
@@ -9320,19 +9320,19 @@ class SVG(Group):
             elif event == "end":  # End event.
                 # The iterparse spec makes it clear that internal text data is undefined except at the end.
                 if (
-                    SVG_ATTR_DISPLAY in values
-                    and values[SVG_ATTR_DISPLAY].lower() == SVG_VALUE_NONE
+                        SVG_ATTR_DISPLAY in values
+                        and values[SVG_ATTR_DISPLAY].lower() == SVG_VALUE_NONE
                 ):
                     # We are in a display=none, do not render this. Pop values and continue.
                     context, values = stack.pop()
                     continue
                 s = None
                 if tag in (
-                    SVG_TAG_TEXT,
-                    SVG_TAG_TSPAN,
-                    SVG_TAG_DESC,
-                    SVG_TAG_TITLE,
-                    SVG_TAG_STYLE,
+                        SVG_TAG_TEXT,
+                        SVG_TAG_TSPAN,
+                        SVG_TAG_DESC,
+                        SVG_TAG_TITLE,
+                        SVG_TAG_STYLE,
                 ):
                     attributes = elem.attrib
                     if SVG_ATTR_ID in attributes and root is not None and use == 0:
@@ -9446,12 +9446,12 @@ def _write_node(node, xml_tree=None, viewport_transform=None):
             xml_tree = SubElement(xml_tree, tag)
         for key, value in values.items():
             if key in (
-                "tag",
-                SVG_STRUCT_ATTRIB,
-                SVG_ATTR_TRANSFORM,
-                SVG_ATTR_FILL,
-                SVG_ATTR_STROKE,
-                SVG_TAG_STYLE,
+                    "tag",
+                    SVG_STRUCT_ATTRIB,
+                    SVG_ATTR_TRANSFORM,
+                    SVG_ATTR_FILL,
+                    SVG_ATTR_STROKE,
+                    SVG_TAG_STYLE,
             ):
                 continue
             xml_tree.set(key, str(value))
