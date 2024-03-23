@@ -8389,7 +8389,7 @@ class Text(SVGElement, GraphicObject, Transformable):
         self.font_family = values.get(SVG_ATTR_FONT_FAMILY, self.font_family)
 
         self.font_style = values.get("font_style", self.font_style)
-        self.font_style = values.get(SVG_ATTR_FONT_STYLE, self.font_family)
+        self.font_style = values.get(SVG_ATTR_FONT_STYLE, self.font_style)
 
         self.font_variant = values.get("font_variant", self.font_variant)
         self.font_variant = values.get(SVG_ATTR_FONT_VARIANT, self.font_variant)
