@@ -7816,7 +7816,10 @@ class Group(SVGElement, Transformable, list):
         if isinstance(other, Matrix):
             self.transform *= other
             for e in self:
-                e *= other
+                try:
+                    e *= other
+                except AttributeError:
+                    continue
         return self
 
     def render(self, **kwargs):
@@ -8426,6 +8429,14 @@ class Text(SVGElement, GraphicObject, Transformable):
     def reify(self):
         GraphicObject.reify(self)
         Transformable.reify(self)
+        matrix = self.transform
+        p = Point(self.x, self.y)
+        p *= matrix
+        self.x = p.x
+        self.y = p.y
+
+        matrix.reset()
+        return self
 
     def render(self, **kwargs):
         GraphicObject.render(self, **kwargs)
@@ -9567,6 +9578,10 @@ def _write_node(node, xml_tree=None, viewport_transform=None):
     elif isinstance(node, Text):
         xml_tree = subxml(xml_tree, SVG_TAG_TEXT)
         xml_tree.text = node.text
+        if node.x:
+            xml_tree.set(SVG_ATTR_X, str(node.x))
+        if node.y:
+            xml_tree.set(SVG_ATTR_Y, str(node.y))
         if node.font_family:
             xml_tree.set(SVG_ATTR_FONT_FAMILY, str(node.font_family))
         if node.font_style:
