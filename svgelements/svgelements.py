@@ -9477,15 +9477,15 @@ def _write_node(node, xml_tree=None, viewport_transform=None):
             xml_tree.set(SVG_ATTR_XMLNS_EV, SVG_VALUE_XMLNS_EV)
         else:
             xml_tree = subxml(xml_tree, SVG_NAME_TAG)
-        if node.x:
+        if node.x is not None:
             xml_tree.set(SVG_ATTR_X, str(node.x))
-        if node.y:
+        if node.y is not None:
             xml_tree.set(SVG_ATTR_Y, str(node.y))
-        if node.width:
+        if node.width is not None:
             xml_tree.set(SVG_ATTR_WIDTH, str(node.width))
-        if node.height:
+        if node.height is not None:
             xml_tree.set(SVG_ATTR_HEIGHT, str(node.height))
-        if node.viewbox:
+        if node.viewbox is not None:
             xml_tree.set(SVG_ATTR_VIEWBOX, str(node.viewbox))
         vt = None
         try:
@@ -9500,21 +9500,21 @@ def _write_node(node, xml_tree=None, viewport_transform=None):
             _write_node(child, xml_tree, vt)
     elif isinstance(node, Ellipse):
         xml_tree = subxml(xml_tree, SVG_TAG_ELLIPSE)
-        if node.cx:
+        if node.cx is not None:
             xml_tree.set(SVG_ATTR_CENTER_X, str(node.cx))
-        if node.cy:
+        if node.cy is not None:
             xml_tree.set(SVG_ATTR_CENTER_Y, str(node.cy))
-        if node.rx:
+        if node.rx is not None:
             xml_tree.set(SVG_ATTR_RADIUS_X, str(node.rx))
-        if node.ry:
+        if node.ry is not None:
             xml_tree.set(SVG_ATTR_RADIUS_Y, str(node.ry))
     elif isinstance(node, Circle):
         xml_tree = subxml(xml_tree, SVG_TAG_CIRCLE)
-        if node.cx:
+        if node.cx is not None:
             xml_tree.set(SVG_ATTR_CENTER_X, str(node.cx))
-        if node.cy:
+        if node.cy is not None:
             xml_tree.set(SVG_ATTR_CENTER_Y, str(node.cy))
-        if node.rx:
+        if node.rx is not None:
             xml_tree.set(SVG_ATTR_RADIUS, str(node.rx))
     elif isinstance(node, Image):
         xml_tree = subxml(xml_tree, SVG_TAG_IMAGE)
@@ -9528,23 +9528,23 @@ def _write_node(node, xml_tree=None, viewport_transform=None):
                 "xlink:href",
                 f"data:image/png;base64,{b64encode(stream.getvalue()).decode('utf8')}",
             )
-        if node.x:
+        if node.x is not None:
             xml_tree.set(SVG_ATTR_X, str(node.x))
-        if node.y:
+        if node.y is not None:
             xml_tree.set(SVG_ATTR_Y, str(node.y))
-        if node.width:
+        if node.width is not None:
             xml_tree.set(SVG_ATTR_WIDTH, str(node.width))
-        if node.height:
+        if node.height is not None:
             xml_tree.set(SVG_ATTR_HEIGHT, str(node.height))
     elif isinstance(node, SimpleLine):
         xml_tree = subxml(xml_tree, SVG_TAG_LINE)
-        if node.x1:
+        if node.x1 is not None:
             xml_tree.set(SVG_ATTR_X1, str(node.x1))
-        if node.y1:
+        if node.y1 is not None:
             xml_tree.set(SVG_ATTR_Y1, str(node.y1))
-        if node.x2:
+        if node.x2 is not None:
             xml_tree.set(SVG_ATTR_X2, str(node.x2))
-        if node.y2:
+        if node.y2 is not None:
             xml_tree.set(SVG_ATTR_Y2, str(node.y2))
     elif isinstance(node, Path):
         xml_tree = subxml(xml_tree, SVG_TAG_PATH)
@@ -9563,62 +9563,62 @@ def _write_node(node, xml_tree=None, viewport_transform=None):
         )
     elif isinstance(node, Rect):
         xml_tree = subxml(xml_tree, SVG_TAG_RECT)
-        if node.x:
+        if node.x is not None:
             xml_tree.set(SVG_ATTR_X, str(node.x))
-        if node.y:
+        if node.y is not None:
             xml_tree.set(SVG_ATTR_Y, str(node.y))
-        if node.rx:
+        if node.rx is not None:
             xml_tree.set(SVG_ATTR_RADIUS_X, str(node.rx))
-        if node.ry:
+        if node.ry is not None:
             xml_tree.set(SVG_ATTR_RADIUS_Y, str(node.ry))
-        if node.width:
+        if node.width is not None:
             xml_tree.set(SVG_ATTR_WIDTH, str(node.width))
-        if node.height:
+        if node.height is not None:
             xml_tree.set(SVG_ATTR_HEIGHT, str(node.height))
     elif isinstance(node, Text):
         xml_tree = subxml(xml_tree, SVG_TAG_TEXT)
         xml_tree.text = node.text
-        if node.x:
+        if node.x is not None:
             xml_tree.set(SVG_ATTR_X, str(node.x))
-        if node.y:
+        if node.y is not None:
             xml_tree.set(SVG_ATTR_Y, str(node.y))
-        if node.font_family:
+        if node.font_family is not None:
             xml_tree.set(SVG_ATTR_FONT_FAMILY, str(node.font_family))
-        if node.font_style:
+        if node.font_style is not None:
             xml_tree.set(SVG_ATTR_FONT_STYLE, str(node.font_style))
-        if node.font_variant:
+        if node.font_variant is not None:
             xml_tree.set(SVG_ATTR_FONT_VARIANT, str(node.font_variant))
-        if node.font_weight:
+        if node.font_weight is not None:
             xml_tree.set(SVG_ATTR_FONT_WEIGHT, str(node.font_weight))
-        if node.font_stretch:
+        if node.font_stretch is not None:
             xml_tree.set(SVG_ATTR_FONT_STRETCH, node.font_stretch)
-        if node.font_size:
+        if node.font_size is not None:
             xml_tree.set(SVG_ATTR_FONT_SIZE, str(node.font_size))
-        if node.line_height:
+        if node.line_height is not None:
             xml_tree.set("line_height", str(node.line_height))
-        if node.anchor:
+        if node.anchor is not None:
             xml_tree.set(SVG_ATTR_TEXT_ANCHOR, node.anchor)
-        if node.alignment_baseline:
+        if node.alignment_baseline is not None:
             xml_tree.set(SVG_ATTR_TEXT_ALIGNMENT_BASELINE, node.alignment_baseline)
     elif isinstance(node, Desc):
         xml_tree = subxml(xml_tree, SVG_TAG_DESC)
-        if node.desc:
+        if node.desc is not None:
             xml_tree.set(SVG_TAG_DESC, str(node.desc))
     elif isinstance(node, Title):
         xml_tree = subxml(xml_tree, SVG_TAG_TITLE)
-        if node.title:
+        if node.title is not None:
             xml_tree.set(SVG_TAG_TITLE, str(node.title))
     elif isinstance(node, Pattern):
         xml_tree = subxml(xml_tree, SVG_TAG_PATTERN)
-        if node.pattern_transform:
+        if node.pattern_transform is not None:
             xml_tree.set(SVG_ATTR_PATTERN_TRANSFORM, str(node.pattern_transform))
-        if node.pattern_content_units:
+        if node.pattern_content_units is not None:
             xml_tree.set(
                 SVG_ATTR_PATTERN_CONTENT_UNITS, str(node.pattern_content_units)
             )
-        if node.pattern_units:
+        if node.pattern_units is not None:
             xml_tree.set(SVG_ATTR_PATTERN_UNITS, str(node.pattern_units))
-        if node.preserve_aspect_ratio:
+        if node.preserve_aspect_ratio is not None:
             xml_tree.set(SVG_ATTR_PRESERVEASPECTRATIO, str(node.preserve_aspect_ratio))
     elif isinstance(node, Use):
         # While Use elements are originally their own thing it can't be restored.
