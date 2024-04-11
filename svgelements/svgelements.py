@@ -21,6 +21,7 @@ from math import (
     sin,
     sqrt,
     tan,
+    isclose
 )
 from xml.etree.ElementTree import iterparse
 
@@ -5549,7 +5550,7 @@ class Arc(Curve):
     def is_circular(self):
         a = self.rx
         b = self.ry
-        return a == b
+        return isclose(a, b)
 
     @property
     def radius(self):
@@ -6500,7 +6501,7 @@ class Path(Shape, MutableSequence):
             return [s * self.transform for s in self._segments]
         return self._segments
 
-    def approximate_arcs_with_cubics(self, error=0.1):
+    def approximate_arcs_with_cubics(self, error=0.1, only_non_circular=False):
         """
         Iterates through this path and replaces any Arcs with cubic Bézier curves.
         """
@@ -6508,6 +6509,8 @@ class Path(Shape, MutableSequence):
         for s in range(len(self) - 1, -1, -1):
             segment = self[s]
             if isinstance(segment, Arc):
+                if only_non_circular and segment.is_circular():
+                    continue
                 arc_required = int(ceil(abs(segment.sweep) / sweep_limit))
                 self[s: s + 1] = list(segment.as_cubic_curves(arc_required))
 
